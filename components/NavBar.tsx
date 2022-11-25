@@ -3,13 +3,25 @@ import { CaretDownIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import styles from "./NavBar.module.scss";
 
-type Props = {};
+type Props = {
+    fields: object;
+};
 
-export const NavBar = (props: Props) => {
+export const NavBar = ({ fields }: Props) => {
+    console.log(fields);
     return (
         <NavigationMenu.Root className={styles.container}>
             <NavigationMenu.List className={styles.NavBar}>
-                <div className={styles.NavBar__logo}>NJPW DB</div>
+                <div className={`${styles.NavBar__logo} flex`}>
+                    {/* <Image
+                        src={`https:${image}`}
+                        alt="NJPW"
+                        width="25"
+                        height="20"
+                        className="mr-2"
+                    />
+                    NJPW DB */}
+                </div>
                 <div className={styles.NavBar__links}>
                     <NavigationMenu.Item className={styles.NavBar__item}>
                         <NavigationMenu.Trigger
