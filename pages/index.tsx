@@ -5,14 +5,14 @@ import { createClient } from "contentful";
 
 export async function getStaticProps() {
     const client = createClient({
-        accessToken: "0IRHIiCOME2lbCZeyFSGiPrJ5HaA1TrI6V3cflGzzDo",
-        space: "t5lykk6ug6w4",
+        accessToken: "",
+        space: "",
     });
 
     const res = await client.getEntries({ content_type: "header" });
     return {
         props: {
-            image: res.items[0],
+            image: res.items[0].fields,
         },
     };
 }
@@ -32,7 +32,7 @@ export default function Home({ image }: Props) {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <NavBar props={image} />
+            <NavBar image={image} />
             <main></main>
             <Footer />
         </div>
