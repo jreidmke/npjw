@@ -7,7 +7,7 @@ type Props = {};
 
 export const NavBar = (props: Props) => {
     return (
-        <NavigationMenu.Root>
+        <NavigationMenu.Root className={styles.container}>
             <NavigationMenu.List className={styles.NavBar}>
                 <div className={styles.NavBar__logo}>NJPW DB</div>
                 <div className={styles.NavBar__links}>
