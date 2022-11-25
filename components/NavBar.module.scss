@@ -1,0 +1,37 @@
+.NavBar {
+    @apply flex;
+    @apply justify-between;
+    @apply border-b;
+    @apply align-middle;
+    @apply px-20;
+    @apply items-center;
+    height: 80px;
+}
+
+.NavBar__logo {
+}
+
+.NavBar__links {
+    @apply flex;
+}
+
+.NavBar__trigger {
+    @apply flex;
+    @apply items-center;
+    &:hover {
+        svg {
+            @apply rotate-180;
+        }
+    }
+}
+
+.NavBar__item {
+    @apply mx-8;
+}
+
+.NavBar__dropdown {
+    @apply fixed;
+    @apply pr-6;
+    @apply pl-1;
+    @apply bg-white;
+}
