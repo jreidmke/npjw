@@ -5,8 +5,8 @@ import { createClient } from "contentful";
 
 export async function getStaticProps() {
     const client = createClient({
-        accessToken: "",
-        space: "",
+        accessToken: "0IRHIiCOME2lbCZeyFSGiPrJ5HaA1TrI6V3cflGzzDo",
+        space: "t5lykk6ug6w4",
     });
 
     const res = await client.getEntries({ content_type: "header" });
@@ -17,11 +17,21 @@ export async function getStaticProps() {
     };
 }
 
-type Props = {
-    image: object;
-};
+interface Props {
+    image: {
+        headerLogo: {
+            fields: {
+                file: {
+                    url: string;
+                };
+            };
+        };
+        title: string;
+    };
+}
 
 export default function Home({ image }: Props) {
+    console.log(image);
     return (
         <div>
             <Head>

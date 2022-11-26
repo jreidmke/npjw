@@ -4,23 +4,33 @@ import Image from "next/image";
 import styles from "./NavBar.module.scss";
 
 type Props = {
-    fields: object;
+    image: {
+        headerLogo: {
+            fields: {
+                file: {
+                    url: string;
+                };
+            };
+        };
+        title: string;
+    };
 };
 
-export const NavBar = ({ fields }: Props) => {
-    console.log(fields);
+export const NavBar = ({ image }: Props) => {
+    const { title, headerLogo } = image;
+    console.log(image);
     return (
         <NavigationMenu.Root className={styles.container}>
             <NavigationMenu.List className={styles.NavBar}>
                 <div className={`${styles.NavBar__logo} flex`}>
-                    {/* <Image
-                        src={`https:${image}`}
+                    <Image
+                        src={`https:${headerLogo.fields.file.url}`}
                         alt="NJPW"
                         width="25"
                         height="20"
                         className="mr-2"
                     />
-                    NJPW DB */}
+                    {title}
                 </div>
                 <div className={styles.NavBar__links}>
                     <NavigationMenu.Item className={styles.NavBar__item}>
