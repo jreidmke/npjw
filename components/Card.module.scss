@@ -1,0 +1,23 @@
+.PerformerCard {
+    @apply m-4;
+    @apply text-center;
+    @apply border;
+    @apply rounded;
+    @apply w-64;
+    @apply h-96;
+    @apply justify-center;
+    @apply overflow-hidden;
+}
+
+.text {
+    @apply text-sm;
+}
+
+.title {
+    @apply mt-4;
+}
+
+.PerformerCard__portrait {
+    @apply h-56;
+    @apply overflow-hidden;
+}

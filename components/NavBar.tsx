@@ -18,7 +18,6 @@ type Props = {
 
 export const NavBar = ({ image }: Props) => {
     const { title, headerLogo } = image;
-    console.log(image);
     return (
         <NavigationMenu.Root className={styles.container}>
             <NavigationMenu.List className={styles.NavBar}>

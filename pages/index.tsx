@@ -2,6 +2,8 @@ import Head from "next/head";
 import { Footer } from "../components/Footer";
 import { NavBar } from "../components/NavBar";
 import { createClient } from "contentful";
+import PerformerCard from "../components/Card";
+import Blog from "../components/Blog";
 
 export async function getStaticProps() {
     const client = createClient({
@@ -10,9 +12,13 @@ export async function getStaticProps() {
     });
 
     const res = await client.getEntries({ content_type: "header" });
+    const res2 = await client.getEntries({ content_type: "featuredCard" });
+    const res3 = await client.getEntries({ content_type: "blogPost" });
     return {
         props: {
             image: res.items[0].fields,
+            performers: res2.items,
+            blogPosts: res3.items,
         },
     };
 }
@@ -28,10 +34,30 @@ interface Props {
         };
         title: string;
     };
+    performers: [
+        {
+            sys: { id: string };
+            fields: {
+                cardTitle: string;
+                thumbnail: { fields: { file: { url: string } } };
+                cardText: { content: {}; data: {}; nodeType: string };
+            };
+        }
+    ];
+    blogPosts: [
+        {
+            fields: {
+                title: string;
+                author: string;
+                blogCardPublishDate: string;
+                cardText: {};
+            };
+            sys: { id: string };
+        }
+    ];
 }
 
-export default function Home({ image }: Props) {
-    console.log(image);
+export default function Home({ image, performers, blogPosts }: Props) {
     return (
         <div>
             <Head>
@@ -43,7 +69,52 @@ export default function Home({ image }: Props) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <NavBar image={image} />
-            <main></main>
+            <main className="flex justify-around">
+                <div className="w-3/5">
+                    <h1 className="text-center">Performers</h1>
+                    <div className="flex flex-wrap">
+                        {performers.map(
+                            (p: {
+                                sys: { id: string };
+                                fields: {
+                                    cardTitle: string;
+                                    thumbnail: {
+                                        fields: { file: { url: string } };
+                                    };
+                                    cardText: {
+                                        content: {};
+                                        data: {};
+                                        nodeType: string;
+                                    };
+                                };
+                            }) => (
+                                <PerformerCard
+                                    key={p.sys.id}
+                                    performer={p.fields}
+                                />
+                            )
+                        )}
+                    </div>
+                </div>
+                <div className="w-2/5">
+                    <h1 className="text-center">Blog Posts</h1>
+                    <div>
+                        {blogPosts.map(
+                            (b: {
+                                fields: {
+                                    title: string;
+                                    author: string;
+                                    blogCardPublishDate: string;
+                                    cardText: {};
+                                };
+                                sys: { id: string };
+                            }) => (
+                                <Blog key={b.sys.id} blog={b} />
+                            )
+                        )}
+                    </div>
+                </div>
+            </main>
             <Footer />
         </div>
     );
