@@ -35,12 +35,12 @@ export const getStaticPaths = async () => {
     };
 };
 
-export const getStaticProps = async (params: any) => {
-    console.log(params.params);
+export const getStaticProps = async ({ params }: any) => {
+    console.log(params);
 
     const { items } = await client.getEntries({
         content_type: "featuredCard",
-        "fields.slug": params.params.slug,
+        "fields.slug": params.slug,
     });
 
     if (!items.length) {
