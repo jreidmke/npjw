@@ -3,14 +3,17 @@ import { Footer } from "../components/Footer";
 import { NavBar } from "../components/NavBar";
 import { createClient } from "contentful";
 import PerformerCard from "../components/Card";
+import Link from "next/link";
 import Blog from "../components/Blog";
 
-export async function getStaticProps() {
-    const client = createClient({
-        accessToken: "0IRHIiCOME2lbCZeyFSGiPrJ5HaA1TrI6V3cflGzzDo",
-        space: "t5lykk6ug6w4",
-    });
 
+
+const client = createClient({
+    accessToken: "0IRHIiCOME2lbCZeyFSGiPrJ5HaA1TrI6V3cflGzzDo",
+    space: "t5lykk6ug6w4",
+});
+
+export async function getStaticProps() {
     const res = await client.getEntries({ content_type: "header" });
     const res2 = await client.getEntries({ content_type: "featuredCard" });
     const res3 = await client.getEntries({ content_type: "blogPost" });
@@ -69,6 +72,7 @@ export default function Home({ image, performers, blogPosts }: Props) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <NavBar image={image} />
+            <Link href="/performers">Link</Link>
             <main className="flex justify-around">
                 <div className="w-3/5">
                     <h1 className="text-center">Performers</h1>

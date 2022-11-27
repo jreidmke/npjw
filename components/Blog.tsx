@@ -19,7 +19,7 @@ export default function Blog({ blog }: Props) {
         <div className="my-8 hover:text-amber-700 cursor-pointer">
             <h2>{fields.title}</h2>
             <sup className="italic">
-                By {fields.author} on
+                By {fields.author} on&nbsp;
                 {format(new Date(fields.blogCardPublishDate), "MM/dd/yyyy")}
             </sup>
         </div>

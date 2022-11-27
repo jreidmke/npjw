@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./Card.module.scss";
+import Link from "next/link";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 interface Card {
@@ -11,7 +12,7 @@ interface Card {
 }
 
 export default function PerformerCard({ performer }: Card) {
-    const { cardTitle, thumbnail, cardText } = performer;
+    const { cardTitle, thumbnail, cardText, slug } = performer;
     let previewText = documentToReactComponents(cardText);
     return (
         <div className={styles.PerformerCard}>
@@ -23,7 +24,9 @@ export default function PerformerCard({ performer }: Card) {
                     alt="Performer portrait"
                 />
             </div>
-            <p className={styles.title}>{cardTitle}</p>
+            <Link href={`/performers/${slug}`}>
+                <p className={styles.title}>{cardTitle}</p>
+            </Link>
             <div className={styles.text}>{previewText}</div>
         </div>
     );
